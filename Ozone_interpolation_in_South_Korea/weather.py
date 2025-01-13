@@ -1,0 +1,47 @@
+import pandas as pd
+
+def match(code, loc):
+    df1 = pd.read_csv("C:/Users/sjjun/OneDrive/Desktop/data_seoul/uba_graph_raw/hourly_temp.csv")
+    df2 = pd.read_csv(f"C:/Users/sjjun/OneDrive/Desktop/weather/{loc}.csv")
+    df1["date"] = pd.to_datetime(df1["date"])
+    df2["date"] = pd.to_datetime(df2["date"])
+    # df1과 df2를 date 열을 기준으로 합침
+    merged_df = pd.merge(df1, df2[['T', 'date']], on='date', how='left')
+    
+    merged_df.rename(columns={"T": code}, inplace=True)
+    
+    merged_df.to_csv("C:/Users/sjjun/OneDrive/Desktop/data_seoul/uba_graph_raw/hourly_temp.csv", index=False)
+    
+match(111121,419)
+match(111123,108)
+match(111131,415)
+match(111141,413)
+match(111142,421)
+match(111151,409)
+match(111152,408)
+match(111161,414)
+match(111171,406)
+match(111181,416)
+match(111191,412)
+match(111201,411)
+match(111212,404)
+match(111221,423)
+match(111231,510)
+match(111241,410)
+match(111251,509)
+match(111261,400)
+match(111262,401)
+match(111273,403)
+match(111274,402)
+match(111281,417)
+match(111291,424)
+match(111301,405)
+match(111311,407)
+match(11112190,419)
+match(11112180,419)
+match(11112170,419)
+
+df = pd.read_csv("C:/Users/sjjun/OneDrive/Desktop/data_seoul/uba_graph_raw/hourly_temp.csv", encoding='cp949')
+df.iloc[:, 1:] = df.iloc[:, 1:].apply(lambda row: row.fillna(row.mean()), axis=1)
+df = df.rename(columns={"UnnameC:/Users/sjjun/OneDrive/Desktop 0":"date"})
+df.to_csv("C:/Users/sjjun/OneDrive/Desktop/data_seoul/uba_graph_raw/hourly_temp.csv", sep=",", index=False)

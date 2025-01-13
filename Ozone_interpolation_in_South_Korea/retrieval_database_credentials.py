@@ -1,0 +1,5 @@
+db_user = '****'
+db_password = '****'
+db_host = 'zam10131.zam.kfa-juelich.de'
+db_port = '5432'
+db_name = 'surface_observations_toar'
